@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 export const NewTask = () => {
   const [selectListId, setSelectListId] = useState();
   const [lists, setLists] = useState([]);
-  const [time,setTime] = useState("");
   const [title, setTitle] = useState("");
   const [detail, setDetail] = useState("");
   const [taskDeadline, setTaskDeadline] = useState("");
@@ -19,15 +18,19 @@ export const NewTask = () => {
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDetailChange = (e) => setDetail(e.target.value);
   const handleTaskDeadlineChange = (e) => setTaskDeadline(e.target.value);
-  const handleSelectList = (id) => setSelectListId(id);
+    const handleSelectList = (id) => setSelectListId(id);
   const onCreateTask = () => {
+    const timestamp = new Date(taskDeadline);
+    const timeStampISO = timestamp.toISOString().slice(0, 19)+"Z";
+    
+
     const data = {
       title: title,
       detail: detail,
       done: false,
-      taskDeadline: taskDeadline,
+      limit: timeStampISO
     };
-
+    
     axios.post(`${url}/lists/${selectListId}/tasks`, data, {
         headers: {
           authorization: `Bearer ${cookies.token}`
@@ -56,10 +59,7 @@ export const NewTask = () => {
     })
   }, [])
   useEffect(() => {
-    const timestamp = new Date();
-    const timeStampISO = timestamp.toISOString().slice(0, 16);
-    console.log(timeStampISO.replace());
-    setTime(timestamp.toISOString().slice(0, 16));
+    
   },[])
   return (
     <div>

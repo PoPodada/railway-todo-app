@@ -61,6 +61,9 @@ export const Home = () => {
       setErrorMessage(`タスクの取得に失敗しました。${err}`);
     })
   }
+
+  
+
   return (
     <div>
       <Header />
@@ -79,7 +82,6 @@ export const Home = () => {
               const isActive = list.id === selectListId;
               return (
                 <li 
-                  key={key}
                   className={`list-tab-item ${isActive ? "active" : ""}`}
                   onClick={() => handleSelectList(list.id)}
                 >
@@ -110,6 +112,50 @@ export const Home = () => {
 // 表示するタスク
 const Tasks = (props) => {
   const { tasks, selectListId, isDoneDisplay } = props;
+
+  const getTimediff = (deadlineTime) => {
+    const nowDate = new Date();
+    const deadLineDate = new Date(deadlineTime);
+    const diff = deadLineDate - nowDate;
+    console.log(nowDate, deadLineDate, diff);
+    const day = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hour = Math.floor(diff % (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
+    const minute = Math.floor(diff % (1000 * 60 * 60) / (1000 * 60));
+    console.log(`${day}日${hour}時間${minute}分`);
+  
+   
+    
+    return `${day}日${hour}時間${minute}分`;
+  }
+  
+  
+  
+
+  const formatDeadline = (deadline) =>{
+    const date = new Date(deadline);
+    const year = date.getFullYear();
+    const month = date.getMonth()+1;
+    const day = date.getDate();
+    const hour = date.getHours();
+    const minute = date.getMinutes();
+
+    return `${year}年${month}月${day}日 ${hour}時${minute}分`;
+  }
+  const keyMove = (e) => {
+    if (e.key === "ArrowUp") {
+        const moveIndex = lists.findIndex((list) => list.id === selectListId); // 選択中のリストのインデックスを取得
+        const previousIndex = (moveIndex - 1 + lists.length) % lists.length; // 選択中のリストの一つ前のインデックスを取得 %でリストの数を超えないようにする
+        const previousId = lists[previousIndex].id; // 選択中のリストの一つ前のリストのIDを取得
+        console.log(lists[previousIndex]);
+        handleSelectList(previousId);
+    } else if (e.key === "ArrowDown") {
+        const moveIndex = lists.findIndex((list) => list.id === selectListId);
+        const nextIndex = (moveIndex + 1) % lists.length;
+        const nextId = lists[nextIndex].id;
+        handleSelectList(nextId);
+    }
+};
+
   if (tasks === null) return <></>
 
   if(isDoneDisplay == "done"){
@@ -122,6 +168,7 @@ const Tasks = (props) => {
           <li key={key} className="task-item">
             <Link to={`/lists/${selectListId}/tasks/${task.id}`} className="task-item-link">
               {task.title}<br />
+              {formatDeadline(task.limit)}<br />
               {task.done ? "完了" : "未完了"}
             </Link>
           </li>
@@ -139,6 +186,8 @@ const Tasks = (props) => {
         <li key={key} className="task-item">
           <Link to={`/lists/${selectListId}/tasks/${task.id}`} className="task-item-link">
             {task.title}<br />
+            {formatDeadline(task.limit)}<br />
+            <span className="deadlineTime">{`期限の時間まで${getTimediff(task.limit)}`}</span><br />
             {task.done ? "完了" : "未完了"}
           </Link>
         </li>

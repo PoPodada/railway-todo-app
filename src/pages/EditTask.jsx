@@ -13,17 +13,22 @@ export const EditTask = () => {
   const [title, setTitle] = useState("");
   const [detail, setDetail] = useState("");
   const [isDone, setIsDone] = useState();
+  const [taskDeadline, setTaskDeadline] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDetailChange = (e) => setDetail(e.target.value);
+  const handleDeadlineChange = (e) => setTaskDeadline(e.target.value);
   const handleIsDoneChange = (e) => setIsDone(e.target.value === "done");
   const onUpdateTask = () => {
     console.log(isDone)
+    const apiFormattedDeadline = taskDeadline + ":00.000Z"
     const data = {
       title: title,
       detail: detail,
+      limit: apiFormattedDeadline,
       done: isDone
     }
+    console.log(data)
 
     axios.put(`${url}/lists/${listId}/tasks/${taskId}`, data, {
       headers: {
@@ -31,8 +36,8 @@ export const EditTask = () => {
       }
     })
     .then((res) => {
-      console.log(res.data)
-      history.push("/");
+      console.log("success",res.data)
+      navigate("/");
     })
     .catch((err) => {
       setErrorMessage(`更新に失敗しました。${err}`);
@@ -61,14 +66,22 @@ export const EditTask = () => {
     })
     .then((res) => {
       const task = res.data
+      console.log(task)
       setTitle(task.title)
       setDetail(task.detail)
       setIsDone(task.done)
+
+      
+      const date = new Date(task.limit)
+      const ISOdate = date.toISOString().slice(0, 16)
+      console.log(ISOdate)
+      setTaskDeadline(ISOdate)
     })
     .catch((err) => {
       setErrorMessage(`タスク情報の取得に失敗しました。${err}`);
     })
   }, [])
+
 
   return (
     <div>
@@ -79,6 +92,8 @@ export const EditTask = () => {
         <form className="edit-task-form">
           <label>タイトル</label><br />
           <input type="text" onChange={handleTitleChange} className="edit-task-title" value={title} /><br />
+          <label>期限</label><br />
+          <input type="datetime-local" onChange={handleDeadlineChange} value={taskDeadline} className="edit-task-deadline"  /><br />
           <label>詳細</label><br />
           <textarea type="text" onChange={handleDetailChange} className="edit-task-detail" value={detail} /><br />
           <div>
