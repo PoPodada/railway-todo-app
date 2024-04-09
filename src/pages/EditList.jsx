@@ -69,14 +69,6 @@ export const EditList = () => {
         <form className="edit-list-form">
           <label>タイトル</label><br />
           <input type="text" className="edit-list-title" value={title} onChange={handleTitleChange} /><br />
-          <input
-            type="datetime-local"
-            id="meeting-time"
-            name="meeting-time"
-            value="2018-06-12T19:30"
-            min="2018-06-07T00:00"
-            max="2018-06-14T00:00" />
-
           <button type="button" className="delete-list-button" onClick={onDeleteList}>削除</button>
           <button type="button" className="edit-list-button" onClick={onUpdateList}>更新</button>
         </form>

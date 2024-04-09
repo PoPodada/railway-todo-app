@@ -9,19 +9,23 @@ import { useNavigate } from "react-router-dom";
 export const NewTask = () => {
   const [selectListId, setSelectListId] = useState();
   const [lists, setLists] = useState([]);
+  const [time,setTime] = useState("");
   const [title, setTitle] = useState("");
   const [detail, setDetail] = useState("");
+  const [taskDeadline, setTaskDeadline] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [cookies] = useCookies();
   const navigate = useNavigate();
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDetailChange = (e) => setDetail(e.target.value);
+  const handleTaskDeadlineChange = (e) => setTaskDeadline(e.target.value);
   const handleSelectList = (id) => setSelectListId(id);
   const onCreateTask = () => {
     const data = {
       title: title,
       detail: detail,
       done: false,
+      taskDeadline: taskDeadline,
     };
 
     axios.post(`${url}/lists/${selectListId}/tasks`, data, {
@@ -51,7 +55,12 @@ export const NewTask = () => {
       setErrorMessage(`リストの取得に失敗しました。${err}`);
     })
   }, [])
-
+  useEffect(() => {
+    const timestamp = new Date();
+    const timeStampISO = timestamp.toISOString().slice(0, 16);
+    console.log(timeStampISO.replace());
+    setTime(timestamp.toISOString().slice(0, 16));
+  },[])
   return (
     <div>
       <Header />
@@ -67,6 +76,8 @@ export const NewTask = () => {
           </select><br />
           <label>タイトル</label><br />
           <input type="text" onChange={handleTitleChange} className="new-task-title" /><br />
+          <label>期限</label><br />
+          <input type="datetime-local" value={taskDeadline} onChange={handleTaskDeadlineChange}  /><br />
           <label>詳細</label><br />
           <textarea type="text" onChange={handleDetailChange} className="new-task-detail" /><br />
           <button type="button" className="new-task-button" onClick={onCreateTask}>作成</button>
