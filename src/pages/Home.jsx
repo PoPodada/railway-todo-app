@@ -61,6 +61,21 @@ export const Home = () => {
       setErrorMessage(`タスクの取得に失敗しました。${err}`);
     })
   }
+  const keyMove = (e) => {
+    if (e.key === "ArrowUp") {
+      e.preventDefault(); // デフォルトのキーイベントを無効化
+      const moveIndex = lists.findIndex((list) => list.id === selectListId);
+      const previousIndex = (moveIndex - 1 + lists.length) % lists.length;
+      const previousId = lists[previousIndex].id;
+      handleSelectList(previousId);
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault(); // デフォルトのキーイベントを無効化
+      const moveIndex = lists.findIndex((list) => list.id === selectListId);
+      const nextIndex = (moveIndex + 1) % lists.length;
+      const nextId = lists[nextIndex].id;
+      handleSelectList(nextId);
+    }
+  };
 
   
 
@@ -82,6 +97,9 @@ export const Home = () => {
               const isActive = list.id === selectListId;
               return (
                 <li 
+                onKeyDown={keyMove} 
+                tabIndex="0"
+                  role="listitem"
                   className={`list-tab-item ${isActive ? "active" : ""}`}
                   onClick={() => handleSelectList(list.id)}
                 >
