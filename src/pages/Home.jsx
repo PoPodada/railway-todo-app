@@ -84,7 +84,10 @@ export const Home = () => {
       <Header />
       <main className="taskList">
         <p className="error-message">{errorMessage}</p>
+
+
         <div>
+
           <div className="list-header">
             <h2>リスト一覧</h2>
             <div className="list-menu">
@@ -92,6 +95,7 @@ export const Home = () => {
               <p><Link to={`/lists/${selectListId}/edit`}>選択中のリストを編集</Link></p>
             </div>
           </div>
+
           <ul className="list-tab">
             {lists.map((list, key) => {
               const isActive = list.id === selectListId;
@@ -108,6 +112,7 @@ export const Home = () => {
               )
             })}
           </ul>
+
           <div className="tasks">
             <div className="tasks-header">
               <h2>タスク一覧</h2>
@@ -119,9 +124,14 @@ export const Home = () => {
                 <option value="done">完了</option>
               </select>
             </div>
+
             <Tasks tasks={tasks} selectListId={selectListId} isDoneDisplay={isDoneDisplay} />
           </div>
+
+          
         </div>
+
+
       </main>
     </div>
   )
@@ -159,21 +169,7 @@ const Tasks = (props) => {
 
     return `${year}年${month}月${day}日 ${hour}時${minute}分`;
   }
-  const keyMove = (e) => {
-    if (e.key === "ArrowUp") {
-        const moveIndex = lists.findIndex((list) => list.id === selectListId); // 選択中のリストのインデックスを取得
-        const previousIndex = (moveIndex - 1 + lists.length) % lists.length; // 選択中のリストの一つ前のインデックスを取得 %でリストの数を超えないようにする
-        const previousId = lists[previousIndex].id; // 選択中のリストの一つ前のリストのIDを取得
-        console.log(lists[previousIndex]);
-        handleSelectList(previousId);
-    } else if (e.key === "ArrowDown") {
-        const moveIndex = lists.findIndex((list) => list.id === selectListId);
-        const nextIndex = (moveIndex + 1) % lists.length;
-        const nextId = lists[nextIndex].id;
-        handleSelectList(nextId);
-    }
-};
-
+  
   if (tasks === null) return <></>
 
   if(isDoneDisplay == "done"){

@@ -14,6 +14,7 @@ body {
   font-family: $font-default;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
 }
 
 code {
@@ -27,4 +28,11 @@ button {
   outline: none;
   padding: 0;
   appearance: none;
+}
+
+@media screen and (max-width: 768px) {
+	
+}
+@media screen and (max-width: 320px) {
+  
 }
