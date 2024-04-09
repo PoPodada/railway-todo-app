@@ -4,14 +4,14 @@ import { useCookies } from "react-cookie";
 import { useNavigate, useParams } from "react-router-dom";
 import { Header } from "../components/Header";
 import { url } from "../const";
-import "./editList.scss";
+import "../styles/editList.scss";
 
 export const EditList = () => {
   const navigate = useNavigate();
   const { listId } = useParams();
   const [title, setTitle] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [ cookies ] = useCookies();
+  const [cookies] = useCookies();
   const handleTitleChange = (e) => setTitle(e.target.value);
   const onUpdateList = () => {
     const data = {
@@ -23,12 +23,12 @@ export const EditList = () => {
         authorization: `Bearer ${cookies.token}`
       }
     })
-    .then(() => {
-      history.push("/");
-    })
-    .catch((err) => {
-    setErrorMessage(`更新に失敗しました。 ${err}`);
-    })
+      .then(() => {
+        history.push("/");
+      })
+      .catch((err) => {
+        setErrorMessage(`更新に失敗しました。 ${err}`);
+      })
   }
 
   const onDeleteList = () => {
@@ -37,12 +37,12 @@ export const EditList = () => {
         authorization: `Bearer ${cookies.token}`
       }
     })
-    .then(() => {
-      navigate("/");
-    })
-    .catch((err) => {
-      setErrorMessage(`削除に失敗しました。${err}`);
-    })
+      .then(() => {
+        navigate("/");
+      })
+      .catch((err) => {
+        setErrorMessage(`削除に失敗しました。${err}`);
+      })
   }
 
   useEffect(() => {
@@ -51,13 +51,13 @@ export const EditList = () => {
         authorization: `Bearer ${cookies.token}`
       }
     })
-    .then((res) => {
-      const list = res.data;
-      setTitle(list.title);
-    })
-    .catch((err) => {
-      setErrorMessage(`リスト情報の取得に失敗しました。${err}`);
-    })
+      .then((res) => {
+        const list = res.data;
+        setTitle(list.title);
+      })
+      .catch((err) => {
+        setErrorMessage(`リスト情報の取得に失敗しました。${err}`);
+      })
   }, [])
 
   return (
@@ -69,6 +69,14 @@ export const EditList = () => {
         <form className="edit-list-form">
           <label>タイトル</label><br />
           <input type="text" className="edit-list-title" value={title} onChange={handleTitleChange} /><br />
+          <input
+            type="datetime-local"
+            id="meeting-time"
+            name="meeting-time"
+            value="2018-06-12T19:30"
+            min="2018-06-07T00:00"
+            max="2018-06-14T00:00" />
+
           <button type="button" className="delete-list-button" onClick={onDeleteList}>削除</button>
           <button type="button" className="edit-list-button" onClick={onUpdateList}>更新</button>
         </form>

@@ -4,7 +4,7 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import { url } from "../const";
 import { useNavigate, useParams } from "react-router-dom";
-import "./editTask.scss"
+import "../styles/editTask.scss"
 
 export const EditTask = () => {
   const navigate = useNavigate();
