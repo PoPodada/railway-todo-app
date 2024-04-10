@@ -2,13 +2,12 @@
   margin: 50px auto;
   list-style: none;
   width: 100%;
-
 }
 
 .list-header {
   display: flex;
   justify-content: space-between;
-  padding:0 4%;
+  padding: 0 4%;
 }
 
 .list-menu {
@@ -19,8 +18,8 @@
   list-style: none;
   display: flex;
   overflow-x: auto;
-  padding:0 8%;
-  margin:0 8%;
+  padding: 0 8%;
+  margin: 0 8%;
 }
 
 .list-tab-item {
@@ -29,13 +28,13 @@
   padding: 0 25px;
   text-overflow: normal;
   margin-right: 5px;
-  border: solid 1px #242F9B;
+  border: solid 1px #242f9b;
   justify-content: center;
   align-items: center;
 }
 
 .active {
-  background-color: #242F9B;
+  background-color: #242f9b;
   color: #ffffff;
 }
 
@@ -46,7 +45,7 @@
 .tasks-header {
   display: flex;
   justify-content: space-between;
-  padding:0 4%;
+  padding: 0 4%;
 }
 
 .task-item {
@@ -74,44 +73,44 @@
 .display-select-wrapper {
   width: 100px;
   margin: 0 0 25px auto;
-  padding:0 4%;
+  padding: 0 4%;
 }
 
 .display-select {
   width: 100%;
 }
-.deadlineTime{
-  color:#ff3333;
+.deadlineTime {
+  color: #ff3333;
 }
-p{
-  margin:0;
-  padding:0;
+p {
+  margin: 0;
+  padding: 0;
 }
-.task-menu{
-  padding:0 4%;
+.task-menu {
+  padding: 0 4%;
 }
 
 @media screen and (max-width: 500px) {
-	.list-tab{
-    display:block;
+  .list-tab {
+    display: block;
   }
-  .list-tab-item{
+  .list-tab-item {
     width: 80%;
     margin-bottom: 5px;
   }
 }
 @media screen and (max-width: 320px) {
-	.list-header{
-    display:block;
+  .list-header {
+    display: block;
   }
-  .list-tab-item{
+  .list-tab-item {
     width: 80%;
     margin-bottom: 5px;
   }
-  .task-item{
-    height:150px;
+  .task-item {
+    height: 150px;
   }
-  .deadlineTime{
+  .deadlineTime {
     display: block;
   }
 }

@@ -3,7 +3,7 @@
 .header {
   width: 100%;
   height: 80px;
-  background-color: #242F9B;
+  background-color: #242f9b;
   color: #ffffff;
   display: flex;
   justify-content: space-between;
@@ -13,15 +13,15 @@
   color: #ffffff;
   margin: auto 25px auto auto;
 }
-.header-h1{
-  margin-left:4%;
+.header-h1 {
+  margin-left: 4%;
 }
 
 @media screen and (max-width: 320px) {
-	.header{
+  .header {
     display: block;
   }
-  .sign-out-button{
+  .sign-out-button {
     display: block;
   }
 }

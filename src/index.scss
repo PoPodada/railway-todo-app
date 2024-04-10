@@ -2,19 +2,16 @@
   margin: 0;
   padding: 0;
 }
-$font-default:-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-sans-serif;
+$font-default: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 
-$font-code:source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-monospace;
+$font-code: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 
 body {
   margin: 0;
   font-family: $font-default;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
 }
 
 code {
@@ -31,8 +28,6 @@ button {
 }
 
 @media screen and (max-width: 768px) {
-	
 }
 @media screen and (max-width: 320px) {
-  
 }
