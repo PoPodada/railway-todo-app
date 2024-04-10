@@ -35,7 +35,12 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "fmt": "prettier --write ."
+    "lint:prettier": "prettier --check .",
+    "fix:prettier": "prettier --write .",
+    "lint:eslint": "eslint src/*",
+    "fix:eslint": "eslint src/* --fix",
+    "lint": "npm run lint:prettier && npm run lint:eslint",
+    "fix": "npm run fix:prettier && npm run fix:eslint"
   },
   "eslintConfig": {
     "extends": [
