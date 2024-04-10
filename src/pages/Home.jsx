@@ -101,8 +101,8 @@ export const Home = () => {
               const isActive = list.id === selectListId;
               return (
                 <li 
-                onKeyDown={keyMove} 
-                tabIndex="0"
+                  onKeyDown={keyMove} 
+                  tabIndex="0"
                   role="listitem"
                   className={`list-tab-item ${isActive ? "active" : ""}`}
                   onClick={() => handleSelectList(list.id)}
@@ -174,7 +174,7 @@ const Tasks = (props) => {
 
   if(isDoneDisplay == "done"){
     return (
-      <ul>
+      <ul className="task-menu">
         {tasks.filter((task) => {
           return task.done === true
         })
@@ -192,7 +192,7 @@ const Tasks = (props) => {
   }
 
   return (
-    <ul>
+    <ul className="task-menu">
       {tasks.filter((task) => {
         return task.done === false
       })
@@ -201,8 +201,9 @@ const Tasks = (props) => {
           <Link to={`/lists/${selectListId}/tasks/${task.id}`} className="task-item-link">
             {task.title}<br />
             {formatDeadline(task.limit)}<br />
-            <span className="deadlineTime">{`期限の時間まで${getTimediff(task.limit)}`}</span><br />
-            {task.done ? "完了" : "未完了"}
+            <span className="deadlineTime">期限の時間まで</span>
+            <span className="deadlineTime">{getTimediff(task.limit)}</span>
+            <span>{task.done ? "完了" : "未完了"}</span>
           </Link>
         </li>
       ))}

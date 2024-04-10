@@ -13,3 +13,15 @@
   color: #ffffff;
   margin: auto 25px auto auto;
 }
+.header-h1{
+  margin-left:4%;
+}
+
+@media screen and (max-width: 320px) {
+	.header{
+    display: block;
+  }
+  .sign-out-button{
+    display: block;
+  }
+}
