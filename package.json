@@ -40,7 +40,11 @@
     "lint:eslint": "eslint src/*",
     "fix:eslint": "eslint src/* --fix",
     "lint": "npm run lint:prettier && npm run lint:eslint",
-    "fix": "npm run fix:prettier && npm run fix:eslint"
+    "fix": "npm run fix:prettier && npm run fix:eslint",
+    "rm": "rm -rf docs",
+    "mv": "mv build docs",
+    "git": "git add . && git commit && git push origin master",
+    "deploy": "npm run rm && npm run build && npm run mv && npm run git"
   },
   "eslintConfig": {
     "extends": [
